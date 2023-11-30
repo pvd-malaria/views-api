@@ -59,11 +59,11 @@ jobs:
               rm -rf tmp-deploy;
               rm dist.tgz;
 
-              docker-compose rm -sf promalaria-postgres promalaria-backend promalaria-dash;
+              docker-compose rm -sf promalaria-postgres promalaria-views-api promalaria-dash;
               yes | docker builder prune -f;
 
               docker-compose up -d --build promalaria-postgres;
-              docker-compose up -d --build promalaria-backend;
+              docker-compose up -d --build promalaria-views-api;
               docker-compose up -d --build promalaria-dash;
             "
           EOF
