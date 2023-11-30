@@ -18,9 +18,9 @@ services:
       - ${POSTGRES_PORT}:5432
     networks:
       - pvdnet
-  promalaria-backend:
+  promalaria-views-api:
     build: .
-    container_name: promalaria-backend
+    container_name: promalaria-views-api
     restart: always
     networks:
       - pvdnet
