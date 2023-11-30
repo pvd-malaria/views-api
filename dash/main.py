@@ -14,7 +14,7 @@ APP_PORT = 9009
 DEBUG = False
 
 # Initialize the Dash app
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, serve_locally=False)
 
 # Define the options for the dropdown
 dropdown_options = [
