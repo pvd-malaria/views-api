@@ -7,7 +7,7 @@ on:
 
 env:
   NODE_VERSION: 20.8.0
-  SERVER_PRIVATE_KEY: ${{ secrets.PROD_SERVER_PRIVATE_KEY }}
+  SERVER_PASSWORD: ${{ secrets.PROD_SERVER_PASSWORD }}
   SERVER_USER: ${{ secrets.PROD_SERVER_USER }}
   SERVER_HOST: ${{ secrets.PROD_SERVER_HOST }}
 
@@ -20,6 +20,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_IMAGE }}
+      - name: Install sshpass
+        run: sudo apt install -y sshpass
       - name: Install dependencies
         run: npm ci
       - name: Build
@@ -28,7 +30,7 @@ jobs:
         run: |
           cat <<EOF > deploy
             #!/bin/bash
-            echo "$SERVER_PRIVATE_KEY" > private_key;
+            echo "" > private_key;
             chmod 600 private_key;
 
             mkdir tmp-deploy;
@@ -38,13 +40,13 @@ jobs:
             cp -rf docker-compose.yml tmp-deploy/.;
             tar czf dist.tgz tmp-deploy/;
 
-            ssh -o StrictHostKeyChecking=no -i private_key \
+            sshpass -p "$SERVER_PRIVATE_KEY" ssh -o StrictHostKeyChecking=no \
               $SERVER_USER@$SERVER_HOST "mkdir -p /home/$ERVER_USER/promalaria-backend;"
 
-            scp -o StrictHostKeyChecking=no -i private_key \
+            sshpass -p "$SERVER_PRIVATE_KEY" scp -o StrictHostKeyChecking=no \
               dist.tar.gz $SERVER_USER@$SERVER_HOST:/home/$SERVER_USER/promalaria-backend/dist.tgz;
 
-            ssh -o StrictHostKeyChecking=no -i private_key $SERVER_USER@$SERVER_HOST "
+            sshpass -p "$SERVER_PRIVATE_KEY" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
               cd /home/$SERVER_USER/promalaria-backend;
               rm -rf dash;
               rm -rf dist;
