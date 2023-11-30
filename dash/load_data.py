@@ -4,8 +4,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv('../.env')
 
-VIEWS_PROTOCOL = os.environ.get('VIEWS-PROTOCOL', 'http')
-VIEWS_HOST = os.environ.get('VIEWS-FETCH-HOST', 'localhost')
+VIEWS_PROTOCOL = os.environ.get('VIEWS_PROTOCOL', 'http')
+VIEWS_HOST = os.environ.get('VIEWS_FETCH_HOST', 'localhost')
 
 # Function to load data and calculate the initial graphs
 def load_data(data_viz_list):
