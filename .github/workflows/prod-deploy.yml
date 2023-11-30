@@ -2,7 +2,7 @@ name: Malaria Views
 
 on:
   push:
-    branches: [develop]
+    branches: [prod]
   workflow_dispatch:
 
 env:
