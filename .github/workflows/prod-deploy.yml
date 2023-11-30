@@ -40,13 +40,13 @@ jobs:
             cp -rf docker-compose.yml tmp-deploy/.;
             tar czf dist.tgz tmp-deploy/;
 
-            sshpass -p "$SERVER_PRIVATE_KEY" ssh -o StrictHostKeyChecking=no \
+            sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no \
               $SERVER_USER@$SERVER_HOST "mkdir -p /home/$ERVER_USER/promalaria-backend;"
 
-            sshpass -p "$SERVER_PRIVATE_KEY" scp -o StrictHostKeyChecking=no \
+            sshpass -p "$SERVER_PASSWORD" scp -o StrictHostKeyChecking=no \
               dist.tar.gz $SERVER_USER@$SERVER_HOST:/home/$SERVER_USER/promalaria-backend/dist.tgz;
 
-            sshpass -p "$SERVER_PRIVATE_KEY" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
+            sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
               cd /home/$SERVER_USER/promalaria-backend;
               rm -rf dash;
               rm -rf dist;
