@@ -28,7 +28,7 @@ jobs:
         run: |
           cat <<EOF > deploy
             #!/bin/bash
-            echo "$DEV_SERVER_PRIVATE_KEY" > private_key;
+            echo "$SERVER_PRIVATE_KEY" > private_key;
             chmod 600 private_key;
 
             mkdir tmp-deploy;
@@ -39,13 +39,13 @@ jobs:
             tar czf dist.tgz tmp-deploy/;
 
             ssh -o StrictHostKeyChecking=no -i private_key \
-              $DEV_SERVER_USER@$DEV_SERVER_HOST "mkdir -p /home/$DEV_SERVER_USER/promalaria-backend;"
+              $SERVER_USER@$SERVER_HOST "mkdir -p /home/$SERVER_USER/promalaria-backend;"
 
             scp -o StrictHostKeyChecking=no -i private_key \
-              dist.tar.gz $DEV_SERVER_USER@$DEV_SERVER_HOST:/home/$DEV_SERVER_USER/promalaria-backend/dist.tgz;
+              dist.tar.gz $SERVER_USER@$SERVER_HOST:/home/$SERVER_USER/promalaria-backend/dist.tgz;
 
-            ssh -o StrictHostKeyChecking=no -i private_key $DEV_SERVER_USER@$DEV_SERVER_HOST "
-              cd /home/$DEV_SERVER_USER/promalaria-backend;
+            ssh -o StrictHostKeyChecking=no -i private_key $SERVER_USER@$SERVER_HOST "
+              cd /home/$SERVER_USER/promalaria-backend;
               rm -rf dash;
               rm -rf dist;
               rm package*.json;
