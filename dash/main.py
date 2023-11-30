@@ -79,4 +79,4 @@ def update_graph(dropdown_value):
         return serie_historica_notif_plot(malaria_views['serie_hist_notif'])
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=APP_PORT, debug=DEBUG)
+    app.run(host='promalaria-dash', port=APP_PORT, debug=DEBUG)
