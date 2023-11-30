@@ -32,7 +32,5 @@ services:
     build: ./dash
     container_name: promalaria-dash
     restart: always
-    ports:
-      - 9009:9009
     networks:
       - pvdnet
