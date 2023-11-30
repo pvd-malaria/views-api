@@ -44,7 +44,7 @@ jobs:
               $SERVER_USER@$SERVER_HOST "mkdir -p /home/$SERVER_USER/promalaria-backend;"
 
             sshpass -p "$SERVER_PASSWORD" scp -o StrictHostKeyChecking=no \
-              dist.tar.gz $SERVER_USER@$SERVER_HOST:/home/$SERVER_USER/promalaria-backend/dist.tgz;
+              dist.tgz $SERVER_USER@$SERVER_HOST:/home/$SERVER_USER/promalaria-backend/dist.tgz;
 
             sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST "
               cd /home/$SERVER_USER/promalaria-backend;
