@@ -35,6 +35,7 @@ jobs:
 
             mkdir tmp-deploy;
             cp -rf dist tmp-deploy/.;
+            cp package*.json tmp-deploy/.;
             cp -rf dash tmp-deploy/.;
             cp -rf Dockerfile tmp-deploy/.;
             cp -rf docker-compose.yml tmp-deploy/.;
