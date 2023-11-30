@@ -2,7 +2,7 @@ import pandas as pd
 import glob
 import os
 from dotenv import load_dotenv
-load_dotenv('../.env')
+load_dotenv()
 
 VIEWS_PROTOCOL = os.environ.get('VIEWS_PROTOCOL', 'http')
 VIEWS_HOST = os.environ.get('VIEWS_FETCH_HOST', 'localhost')
