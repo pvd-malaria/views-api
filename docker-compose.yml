@@ -1,0 +1,53 @@
+version: '3.7'
+networks:
+  malaria-net:
+    driver: bridge
+    name: malaria-net
+services:
+  malaria-postgres:
+    image: postgres:latest
+    container_name: malaria-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - malaria-net
+  malaria-nginx:
+    build: ./nginx
+    container_name: malaria-nginx
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+      - 9000:9000
+      - 9009:9009
+    volumes:
+      - ./html:/www/html
+    networks:
+      - malaria-net
+    depends_on:
+      - malaria-backend
+  malaria-backend:
+    build: .
+    container_name: malaria-backend
+    restart: always
+    networks:
+      - malaria-net
+    depends_on:
+      - malaria-postgres
+    volumes:
+      - ./data:/app/data
+  malaria-dash:
+    build: ./dash
+    container_name: malaria-dash
+    restart: always
+    networks:
+      - malaria-net
+    depends_on:
+      - malaria-nginx
