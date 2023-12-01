@@ -26,6 +26,8 @@ services:
       - pvdnet
     depends_on:
       - promalaria-postgres
+    ports:
+      - 8889:8889
     volumes:
       - ./data:/app/data
   promalaria-dash:

@@ -16,6 +16,8 @@ COPY package-lock.json /app/.
 COPY .env /app/.
 WORKDIR /app
 
+EXPOSE 8889
+
 RUN npm ci --omit=dev
 
 CMD ["npx", "dotenv", "-e", ".env", "--", "npm", "run", "start:deployed"]
