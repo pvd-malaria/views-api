@@ -13,7 +13,6 @@ RUN npm i -g npm@latest
 COPY package.json /app/.
 COPY package-lock.json /app/.
 COPY .env /app/.
-RUN npm run build
 WORKDIR /app
 
 EXPOSE 9000
