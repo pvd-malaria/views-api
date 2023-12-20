@@ -10,13 +10,13 @@ RUN apt-get install nodejs -y
 
 RUN npm i -g npm@latest
 
-COPY dist /app
 COPY package.json /app/.
 COPY package-lock.json /app/.
 COPY .env /app/.
+RUN npm run build
 WORKDIR /app
 
-EXPOSE 8889
+EXPOSE 9000
 
 RUN npm ci --omit=dev
 
