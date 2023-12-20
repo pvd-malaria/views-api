@@ -27,7 +27,7 @@ services:
     depends_on:
       - promalaria-postgres
     ports:
-      - 8889:8889
+      - 9000:9000
     volumes:
       - ./data:/app/data
   promalaria-dash:
