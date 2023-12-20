@@ -10,6 +10,7 @@ RUN apt-get install nodejs -y
 
 RUN npm i -g npm@latest
 
+COPY dist /app
 COPY package.json /app/.
 COPY package-lock.json /app/.
 COPY .env /app/.
